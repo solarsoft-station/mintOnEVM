@@ -114,7 +114,7 @@ One of the best ways to test and interact with smart contracts is with a local n
 yarn hardhat node
 ```
 
-You'll get a local blockchain, private keys, localnet eth, and contracts deployed (from the `deploy` folder scripts), and an endpoint to potentially add to an EVM wallet. 
+You'll get a local blockchain, private keys, localnet eth, and an endpoint to potentially add to an EVM wallet. 
 
 
 ## Using a Testnet or Live Network (like Mainnet or Polygon)
