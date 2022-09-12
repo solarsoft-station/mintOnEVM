@@ -1,6 +1,6 @@
 # Solarsoft-Station: mintOnEVM
 
-This repository, configured with HardHat, presents a foundation for deploying an NFT Collection(ERC721 precisely) to any EVM test network. The commands can be replicated with certain adjustments for the respective main networks.
+This repository, configured with HardHat, presents a foundation for deploying an NFT Collection(ERC721A precisely) to any EVM test network. The commands can be replicated with certain adjustments for the respective main networks.
 
 
 | :exclamation:  ** WARNING None of the contracts are audited!  |
@@ -26,7 +26,8 @@ This repository, configured with HardHat, presents a foundation for deploying an
   - [Run a Local Network](#run-a-local-network)
   - [Using a Testnet or Live Network (like Mainnet or Polygon)](#using-a-testnet-or-live-network-like-mainnet-or-polygon)
     - [Goerli Ethereum Testnet Setup](#goerli-ethereum-testnet-setup)
-  [Interacting with Deployed Contracts](#interacting-with-deployed-contracts)
+  - [Verifying Contracts](#verifying-contracts)
+  - [Interacting with Deployed Contracts(#interacting-with-deployed-contracts)
 - [Code Formating](#code-formating)
 - [Contributing](#contributing)
 - [Thank You!](#thank-you)
