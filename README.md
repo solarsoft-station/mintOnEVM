@@ -27,7 +27,7 @@ This repository, configured with HardHat, presents a foundation for deploying an
   - [Using a Testnet or Live Network (like Mainnet or Polygon)](#using-a-testnet-or-live-network-like-mainnet-or-polygon)
     - [Goerli Ethereum Testnet Setup](#goerli-ethereum-testnet-setup)
   - [Verifying Contracts](#verifying-contracts)
-  - [Interacting with Deployed Contracts(#interacting-with-deployed-contracts)
+  - [Interacting with Deployed Contracts](#interacting-with-deployed-contracts)
 - [Code Formating](#code-formating)
 - [Contributing](#contributing)
 - [Thank You!](#thank-you)
