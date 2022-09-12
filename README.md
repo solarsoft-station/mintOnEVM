@@ -151,7 +151,7 @@ You can get one for free from [Alchmey](https://www.alchemy.com/), [Infura](http
 
 This is your private key from your wallet, e.g [Nebula](https://nebulawallet.io) or [MetaMask](https://metamask.io/). This is needed for deploying contracts to public networks. You can optionally set your `MNEMONIC` environment variable instead with some changes to the `hardhat.config.js`.
 
-![WARNING](https://via.placeholder.com/15/f03c15/000000?text=+) **WARNING** ![WARNING](https://via.placeholder.com/15/f03c15/000000?text=+)
+:warning: **WARNING** :warning:
 
 When developing, it's best practice to use a wallet that isn't associated with any real money. A good way to do this is to make a new browser profile (on Chrome, Brave, Firefox, etc) and install the wallet extension on that brower, and never send this wallet money.  
 
