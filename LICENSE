@@ -1,3 +1,11 @@
+yarn hardhat run scripts/verify.js --network goerli
+
+yarn hardhat run scripts/deploy.js --network goerli
+
+yarn hardhat test
+
+yarn hardhat compile
+
 yarn add @types/chai @types/mocha @types/mocha @types/node ts-node typescript @ethersproject/bytes  @ethersproject/hardware-wallets
 
 yarn add erc721a
@@ -6,3 +14,11 @@ yarn add --dev "hardhat@^2.9.9" "@nomicfoundation/hardhat-toolbox@^1.0.1" "@nomi
 
 yarn hardhat 
 
+uint[] ther;
+uint[] tokenId;
+string[] memory uri;
+mapping(uint => string) tokenUs;
+
+for ((uint256 i, uint256 j)=0; (i,j)< ther.length; (i,j)++){
+      tokenUs[tokenId[i]] = uri[i];
+        };
