@@ -14,7 +14,7 @@ This repository, configured with HardHat, presents a foundation for deploying an
 
 
 # Table Of Contents
-- [test NFT Collection](#Solarsoft-Station-mintOnEVM)
+- [MINT ON EVM](#Solarsoft-Station-mintOnEVM)
     - [Completed (but unreviewed) ERC721 contracts:](#completed-but-unreviewed-ERC721-contracts)
     - [Uncompleted:](#uncompleted)
 - [Table Of Contents](#table-of-contents)
