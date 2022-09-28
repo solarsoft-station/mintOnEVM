@@ -12,7 +12,6 @@ import "hardhat/console.sol";
 contract test is Ownable, ERC2981, ERC721A, ReentrancyGuard {
     using Strings for uint256;
     using Counters for Counters.Counter;
-    Counters.Counter private _tokenIds;
 
     uint256 public maxSupply = 1500;
     bool public revealed = false;
@@ -31,7 +30,7 @@ contract test is Ownable, ERC2981, ERC721A, ReentrancyGuard {
     error maxTokensPerAddress();
     error maximumSupply();
 
-    event reveivedUnsolicited(address sender, uint256 amount);
+    event receivedUnsolicited(address sender, uint256 amount);
 
     constructor(string memory _notRevealedURI, string memory _baseTokenURI, uint96 royalties)
         ERC721A("testAlienz", "tA")
@@ -158,7 +157,7 @@ contract test is Ownable, ERC2981, ERC721A, ReentrancyGuard {
     fallback() external {}
 
     receive() external payable {
-       emit reveivedUnsolicited(msg.sender, msg.value);
+       emit receivedUnsolicited(msg.sender, msg.value);
     }
 
     function supportsInterface(bytes4 interfaceId)
