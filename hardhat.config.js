@@ -42,6 +42,10 @@ module.exports = {
       accounts: [process.env.pPRIVATE_KEY] || undefined,
       chainId: 137,
     },
+    mumbai: {
+      url: process.env.QUICKNODE_HTTP_URL,
+      accounts: [process.env.mPRIVATE_KEY],
+    },
     goerli: {
       url: process.env.GOERLI_RPC_URL || "",
       accounts:
