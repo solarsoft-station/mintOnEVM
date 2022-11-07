@@ -12,6 +12,12 @@ module.exports = {
         version: "0.6.6",
       },
     ],
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 1000,
+      },
+    },
   },
   defaultNetwork: "hardhat",
   networks: {
@@ -20,7 +26,7 @@ module.exports = {
       forking: {
         url: process.env.MAINNET_RPC_URL,
         blockNumber: process.env.FORKING_BLOCK_NUMBER || undefined,
-        enabled: false,
+        enabled: true,
       },
       chainId: 31337, //this sortof imposes hardhat's default chainId on the forked chain
     },
@@ -54,14 +60,14 @@ module.exports = {
           : ["putprivateKeyHere"],
       chainId: 5,
     },
-    rinkeby: {
-      url: process.env.RINKEBY_RPC_URL,
-      accounts:
-        process.env.rPRIVATE_KEY !== undefined
-          ? [process.env.rPRIVATE_KEY]
-          : ["putprivateKeyHere"],
-      chainId: 4,
-    },
+    // rinkeby: {
+    //   url: process.env.RINKEBY_RPC_URL,
+    //   accounts:
+    //     process.env.rPRIVATE_KEY !== undefined
+    //       ? [process.env.rPRIVATE_KEY]
+    //       : ["putprivateKeyHere"],
+    //   chainId: 4,
+    // },
     mainnet: {
       url: process.env.MAINNET_RPC_URL,
       accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
@@ -75,18 +81,20 @@ module.exports = {
       polygon: process.env.POLYGONSCAN_API_KEY,
       goerli: process.env.ETHERSCAN_API_KEY, //all etherscan networks use the same apiKey
       rinkeby: process.env.ETHERSCAN_API_KEY,
+      mainnet: process.env.ETHERSCAN_API_KEY, //all etherscan networks use the same apiKey
+
     },
   },
   mocha: {
     timeout: 200000, // 200 seconds max for running tests
   },
-  // gasReporter: {
-  //   enabled: REPORT_GAS,
-  //   currency: "USD",
-  //   outputFile: "gas-report.txt",
-  //   noColors: true,
-  //   // coinmarketcap: process.env.COINMARKETCAP_API_KEY,
-  // },
+  gasReporter: {
+    enabled: process.env.REPORT_GAS,
+    currency: "USD",
+    // outputFile: "gas-report.txt",
+    // noColors: false,
+    coinmarketcap: process.env.COINMARKETCAP_API_KEY,
+  },
   // namedAccounts: {
   //   deployer: {
   //     default: 0, // here this will by default take the first account as deployer

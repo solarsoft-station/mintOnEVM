@@ -8,19 +8,16 @@ import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "hardhat/console.sol";
 
-contract Altans is Ownable, ERC2981, ERC721Enumerable, ReentrancyGuard {
+contract Alta is Ownable, ERC2981, ERC721Enumerable, ReentrancyGuard {
     using Strings for uint256;
-    using Counters for Counters.Counter;
 
     uint256 public maxSupply = 20;
-    bool public revealed = false;
+    bool public revealed;
     string public notRevealedURI;
     string public baseExtension = ".json";
-    string public baseURI; // ipfs://ID/
-    // string private uris;
-    // bool status;
+    string public baseURI;
+    uint256 public _price = 0.1 ether;
 
     mapping(uint256 => uint256) private royaltyOverrides;
     mapping(address => uint256) public addressMintedBalance;
@@ -30,40 +27,68 @@ contract Altans is Ownable, ERC2981, ERC721Enumerable, ReentrancyGuard {
     error maxTokensPerAddress();
     error maximumSupply();
     error URIQueryForNonexistentToken();
+    error TooManyAltans();
 
     event receivedUnsolicited(address sender, uint256 amount);
 
     constructor(
-        // string memory _notRevealedURI,
+        string memory _notRevealedURI,
         string memory _baseTokenURI,
-        uint96 royalties
+        uint96 royalties //3400
     ) ERC721("Altans", "A") {
-        // setNotRevealedURI(_notRevealedURI);
+        setNotRevealedURI(_notRevealedURI);
         setBaseURI(_baseTokenURI);
         _setDefaultRoyalty(msg.sender, royalties);
+        revealed = false;
     }
 
     function _startTokenId() internal view virtual returns (uint256) {
         return 1;
     }
 
-    function mint(uint256 quantity) external nonReentrant {
+    function mint() external payable nonReentrant {
         require(msg.sender == tx.origin, "HAhaha Satoshi had plans");
+        // require(msg.value >= _price, "You obviously didn't attend NFTLondon");
         require(
             addressMintedBalance[msg.sender] < 1,
             "You are allowed to have only 1 Altan in this wallet"
         );
 
-        if (totalSupply() + quantity > maxSupply) revert maximumSupply();
+        if (totalSupply() + 1 > maxSupply) revert maximumSupply();
 
         if (addressMintedBalance[msg.sender] == 1) revert maxTokensPerAddress();
 
-        if (quantity > 1) revert minIsOneAndMintCapIsOne();
+        // uint256 amb = addressMintedBalance[msg.sender];
+        addressMintedBalance[msg.sender] += 1;
+        uint256 i;
+        for (i = 0; i < 1; i++) {
+            if (totalSupply() != 0) {
+                uint mintIndex = totalSupply() + 1;
+                _safeMint(msg.sender, mintIndex, "Altan");
+            } else {
+                _safeMint(msg.sender, 1, "Altan");
+            }
+        }
+    }
+
+    function nftLondon(uint256 quantity) external nonReentrant onlyOwner {
+        require(msg.sender == tx.origin, "HAhaha Satoshi had plans");
+
+        if (totalSupply() + quantity > maxSupply) revert maximumSupply();
+        // if (quantity > maxSupply) revert TooManyAltans();
 
         // uint256 amb = addressMintedBalance[msg.sender];
         addressMintedBalance[msg.sender] += quantity;
-
-        _safeMint(msg.sender, quantity, "testToken");
+        uint256 i;
+        for (i = 0; i < quantity; i++) {
+            if (totalSupply() != 0) {
+                uint mintIndex = totalSupply() + 1;
+                _safeMint(msg.sender, mintIndex, "Altan");
+            } else {
+                uint mintIndex = 1;
+                _safeMint(msg.sender, mintIndex, "Altan");
+            }
+        }
     }
 
     function getAddressMintedBalance(address minter)
@@ -163,9 +188,27 @@ contract Altans is Ownable, ERC2981, ERC721Enumerable, ReentrancyGuard {
         revealed = _status;
     }
 
+    function setMaxSupply(uint256 _maxSupply) public onlyOwner {
+        maxSupply = _maxSupply;
+    }
+
+    function transferOwnership(address newOwner)
+        public
+        virtual
+        override
+        onlyOwner
+    {
+        require(
+            newOwner != address(0),
+            "Ownable: new owner is the zero address"
+        );
+        _transferOwnership(newOwner);
+        _setDefaultRoyalty(newOwner, 3400);
+
+    }
+
     fallback() external payable {
         emit receivedUnsolicited(msg.sender, msg.value);
-
     }
 
     receive() external payable {
